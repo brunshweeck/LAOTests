@@ -20,43 +20,6 @@ public class Main {
         scanner = new Scanner(System.in);
     }
 
-    private static void initializeStore() {
-        if (store == null) {
-            store = new TreeMap<>();
-        }
-        String[] names = new String[]{
-                "BANANA", "PINEAPPLE", "ORANGE", "LEMON", "COCOA", "PEANUT", "BEAK", "APPLE",
-                "IPHONE 6", "IPHONE 6+", "IPHONE 6S+", "IPHONE 7", "IPHONE X", "IPHONE XR",
-                "SAMSUNG A6", "SAMSUNG A10", "SAMSUNG A20", "SAMSUNG GALAXY",
-                "ITEL P32", "ITEL P33", "ITEL P50", "ITEL P55", "ITEL P60", "ITEL P70",
-                "ADIDAS SHOES", "ALL START SHOES", "AIR DANCE SHOES", "AIR FORCE SHOES", "NIKE SHOES",
-                "33 EXPORT BEER", "KADJI BEER", "MUZIK BEER", "CASTEL BEER", "DOPEL BEER", "ISEMBEC BEER",
-                "GUINNESS BEER", "GUINNESS BIG BEER", "SMOOTH BEER", "SMOOTH BIG BEER",
-                "RED LABEL WHISKY", "BLACK LABEL WHISKY", "MARTINI WHISKY", "BLUE LABEL WHISKY",
-        };
-
-        int[] prices = new int[]{
-                100, 300, 75, 75, 250, 100, 150, 200,
-                35_000, 50_000, 70_000, 85_000, 90_000,  110_000,
-                80_000, 90_000, 150_000, 50_000,
-                55_000, 60_000, 60_000, 70_000, 85_000, 90_000,
-                10_000, 6_000, 10_000, 15_000, 5_000,
-                650, 650, 650, 650, 650, 750,
-                650, 1100, 650, 900,
-                15_000, 15_000, 20_000, 50_000,
-        };
-        for (int i = 0; i < names.length; i++) {
-            int code = rng.nextInt();
-            code = ((code >>> 16) ^ code) & 0xFFFF;
-            // For unique code
-            while (store.containsKey(code)) {
-                code = rng.nextInt();
-                code = ((code >>> 16) ^ code) & 0xFFFF;
-            }
-            store.put(code, new Product(code, names[i], prices[i]));
-        }
-    }
-
     public static void main(String[] args) {
         initializeStore();
         Facture facture = null;
@@ -174,6 +137,43 @@ public class Main {
                 default:
                     assert false;
             }
+        }
+    }
+
+    private static void initializeStore() {
+        if (store == null) {
+            store = new TreeMap<>();
+        }
+        String[] names = new String[]{
+                "BANANA", "PINEAPPLE", "ORANGE", "LEMON", "COCOA", "PEANUT", "BEAK", "APPLE",
+                "IPHONE 6", "IPHONE 6+", "IPHONE 6S+", "IPHONE 7", "IPHONE X", "IPHONE XR",
+                "SAMSUNG A6", "SAMSUNG A10", "SAMSUNG A20", "SAMSUNG GALAXY",
+                "ITEL P32", "ITEL P33", "ITEL P50", "ITEL P55", "ITEL P60", "ITEL P70",
+                "ADIDAS SHOES", "ALL START SHOES", "AIR DANCE SHOES", "AIR FORCE SHOES", "NIKE SHOES",
+                "33 EXPORT BEER", "KADJI BEER", "MUZIK BEER", "CASTEL BEER", "DOPEL BEER", "ISEMBEC BEER",
+                "GUINNESS BEER", "GUINNESS BIG BEER", "SMOOTH BEER", "SMOOTH BIG BEER",
+                "RED LABEL WHISKY", "BLACK LABEL WHISKY", "MARTINI WHISKY", "BLUE LABEL WHISKY",
+        };
+
+        int[] prices = new int[]{
+                100, 300, 75, 75, 250, 100, 150, 200,
+                35_000, 50_000, 70_000, 85_000, 90_000,  110_000,
+                80_000, 90_000, 150_000, 50_000,
+                55_000, 60_000, 60_000, 70_000, 85_000, 90_000,
+                10_000, 6_000, 10_000, 15_000, 5_000,
+                650, 650, 650, 650, 650, 750,
+                650, 1100, 650, 900,
+                15_000, 15_000, 20_000, 50_000,
+        };
+        for (int i = 0; i < names.length; i++) {
+            int code = rng.nextInt();
+            code = ((code >>> 16) ^ code) & 0xFFFF;
+            // For unique code
+            while (store.containsKey(code)) {
+                code = rng.nextInt();
+                code = ((code >>> 16) ^ code) & 0xFFFF;
+            }
+            store.put(code, new Product(code, names[i], prices[i]));
         }
     }
 }
